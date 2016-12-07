@@ -33,13 +33,31 @@ def reverse_string(string):
 # This method is better...
 def caesar_encrypt_faster(string, offset):
     '''Encrypts the input string by offsetting by the offset amount'''
+    string = string.lower()
+    # define some special characters to pass through without modifying
     special_chars = " ~!@#$%^&*()-+_=[]|:;"'<>,.?/'",.0123456789"
-    plaintext = "abcdefghijklmnopqrstuvwxyz"
-    encrypted = plaintext[offset:] + plaintext[:offset] + special_chars
-    plaintext += special_chars
+    plaintext_key = "abcdefghijklmnopqrstuvwxyz"
+    encrypted_key = plaintext_key[offset:] + plaintext_key[:offset] + special_chars
+    plaintext_key += special_chars
     encrypted_string = ''
     for char in string:
-        encrypted_string += encrypted[plaintext.index(char.lower())]
+        encrypted_string += encrypted_key[plaintext_key.index(char)]
     print encrypted_string
 
-caesar_encrypt_faster("some such, string. 123@#$23423|]", 13)
+def leetspeak(string):
+    '''Replaces certain alpha characters with their leetspeak num equivalents.
+    Prints translated string and outputs nothing.'''
+    # treat all characters as uppercase
+    string = string.upper()
+    # define some special characters to pass through without modifying
+    special_chars = " ~!@#$%^&*()-+_=[]|:;"'<>,.?/'",.0123456789"
+    plaintext_key = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    leetspeak_key = '4BCD3F6H1JKLMN0PQR57UVWXYZ'
+    # add common non-alphanum symbols to both strings. Alt. would be to loop
+    # through and only replace chars if they're in the list.
+    plaintext_key += special_chars
+    leetspeak_key += special_chars
+    translated_text = ''
+    for char in string:
+        translated_text += leetspeak_key[plaintext_key.index(char)]
+    print translated_text
