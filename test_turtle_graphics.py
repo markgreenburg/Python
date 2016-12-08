@@ -1,8 +1,8 @@
 '''
 This script tests all of the methods in the turtle_graphics module in sequence
 '''
-import turtle_graphics as turtle_shapes
 import turtle as turtle
+import turtle_graphics as turtle_shapes
 
 # pylint: disable=no-member
 # ^ disable errors for turtle not having the below methods, as they're
