@@ -1,5 +1,6 @@
 '''
 Methods that utilize the turtle graphics library to draw geometric shapes
+from triangles to octagons. Also includes method for pentagram stars.
 PY101 assignments...
 '''
 import turtle
