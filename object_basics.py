@@ -7,7 +7,10 @@ class Person(object): # name of class, inherits (object)
     Makes a person with name and life
     '''
     alive = True
-    def __init__(self, fname, lname, user_info={}): # change constructor to pass in what we want
+    def __init__(self, fname, lname, user_info={}): # change constructor to
+                                                    # pass in what we want. Be
+                                                    # careful with empty
+                                                    # dictionary here....
         '''
         Sets name of each instance of the Person class to janice
         '''
@@ -29,11 +32,3 @@ class Person(object): # name of class, inherits (object)
         self.alive = False
         print "We just killed %s" % self.name
         print "We just killed %s" % self.fname
-
-janice = Person("Janice", "Doe") # self is processed internally so only pass one arg
-bob = Person('Bob', 'Doe')
-
-print bob
-
-janice.greet()
-bob.kill()

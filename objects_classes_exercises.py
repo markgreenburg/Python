@@ -72,29 +72,25 @@ class Person(object):
 # 1) Instantiate an instance object of Person with name of 'Sonny', email of
 #    'sonny@hotmail.com', and phone of '483-485-4948', store it in the variable
 #    sonny.
-sonny = Person("Sonny", "sonny@hotmail.com", "483-485-4948")
+#       - Added answer to test method at bottom of script
 
 # 2) Instantiate another person with the name of 'Jordan', email of
 #    'jordan@aol.com', and phone of '495-586-3456', store it in the variable
 #    'jordan'.
-jordan = Person("Jordan", "jordan@aol.com", "495-586-3456")
+#       - Added answer to test method at bottom of script
 
 # 3) Have Sonny greet Jordan using the greet method
-print "sonny greeting jordan using each's name..."
-sonny.greet(jordan)
+#       - Added answer to test method at bottom of script
 
 # 4) Have jordan greet sonny using the greet method.
-print "jordan greeting sonny using each's name..."
-jordan.greet(sonny)
+#       - Added answer to test method at bottom of script
 
 # 5) Write a print statement to print the contact info (email and phone) of
 #    Sonny.
-print "printing contact info for sonny, then jordan..."
-print "Name: %s; Email: %s; Phone: %s" % (sonny.name, sonny.email, sonny.phone)
+#        - Added answer to test method at bottom of script
 
 # 6) Write another print statement to print the contact info of Jordan.
-print "Name: %s; Email: %s; Phone: %s" % (jordan.name, jordan.email,
-                                          jordan.email)
+#        - Added answer to test method at bottom of script
 
 # 7) Make your own class:
 #    Create a class Vehicle. A vehicle object will have 3 attributes: make,
@@ -154,6 +150,19 @@ def test_objects():
     '''
     Test each of the methods defined to ensure we get back expected output
     '''
+    print "Instantiating sonny instance of Person class..."
+    sonny = Person("Sonny", "sonny@hotmail.com", "483-485-4948")
+    print "Instantiating jordan instance of Person class..."
+    jordan = Person("Jordan", "jordan@aol.com", "495-586-3456")
+    print "jordan greeting sonny using each's name..."
+    jordan.greet(sonny)
+    print "sonny greeting jordan using each's name..."
+    sonny.greet(jordan)
+    print "printing contact info for sonny, then jordan..."
+    print "Name: %s; Email: %s; Phone: %s" % (sonny.name, sonny.email,
+                                              sonny.phone)
+    print "Name: %s; Email: %s; Phone: %s" % (jordan.name, jordan.email,
+                                              jordan.email)
     print "Appending Sonny to Jordan's friend list..."
     jordan.friends.append(sonny)
     print "Appending Jordan to Sonny's friend list..."
