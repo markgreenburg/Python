@@ -80,13 +80,16 @@ sonny = Person("Sonny", "sonny@hotmail.com", "483-485-4948")
 jordan = Person("Jordan", "jordan@aol.com", "495-586-3456")
 
 # 3) Have Sonny greet Jordan using the greet method
+print "sonny greeting jordan using each's name..."
 sonny.greet(jordan)
 
 # 4) Have jordan greet sonny using the greet method.
+print "jordan greeting sonny using each's name..."
 jordan.greet(sonny)
 
 # 5) Write a print statement to print the contact info (email and phone) of
 #    Sonny.
+print "printing contact info for sonny, then jordan..."
 print "Name: %s; Email: %s; Phone: %s" % (sonny.name, sonny.email, sonny.phone)
 
 # 6) Write another print statement to print the contact info of Jordan.
@@ -151,18 +154,31 @@ def test_objects():
     '''
     Test each of the methods defined to ensure we get back expected output
     '''
+    print "Appending Sonny to Jordan's friend list..."
     jordan.friends.append(sonny)
+    print "Appending Jordan to Sonny's friend list..."
     sonny.friends.append(jordan)
+    print "Printing the length of Jordan's friend list..."
     print len(jordan.friends)
+    print "Printing the number of greetings Jordan has issued..."
     print jordan.greeting_count
+    print "Instantiating abe_lincoln instance of Person class..."
     abe_lincoln = Person("Abe", "abe@gmail.com", "483-485-4948")
+    print "Instantiating andy instance of Person class..."
     andy = Person("Andrew", "andylolz@gmail.com", "123-456-789")
+    print "Instantiating tommy instance of Person class..."
     tommy = Person("Thomas", "t_jefferson@gmail.com", "234-567-8910")
+    print "adding tommy object to andy's friend list..."
     andy.add_friend(tommy)
+    print "andy greeting tommy using each's name..."
     andy.greet(tommy)
+    print "andy greeting abe_lincoln using each's name..."
     andy.greet(abe_lincoln)
+    print "andy greeting abe_lincoln using each's name, again..."
     andy.greet(abe_lincoln)
+    print "printing the number of greetings andy has issued..."
     print andy.greeting_count
+    print "printing the number of unique people andy has greeted..."
     andy.num_unique_people_greeted()
 
 if __name__ == "__main__":
