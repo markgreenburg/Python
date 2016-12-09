@@ -41,12 +41,20 @@ def test():
     '''
     Test the selection sort code with random input
     '''
-    start_time = time.time()
     user_list = range(10000)
     random.shuffle(user_list)
-    print user_list
+    # Copy same shuffled list for other sort comparisons
+    ul2 = user_list
+    # Timed execution of our selection sort
+    start_time = time.time()
     selection_sort(user_list)
-    print "--- %s seconds ---" % (time.time() - start_time)
+    print "Selection sort took %s seconds" % (time.time() - start_time)
+    # Compare our results to the internal sort function
+    start_time = time.time()
+    ul2.sort()
+    print "Python's sort function took %s seconds" % (time.time() - start_time)
+    # No surprise...Python's
 
+#
 if __name__ == "__main__":
     test()
