@@ -11,15 +11,15 @@ def reverse_characters(string):
     '''
     # Make the string input into a list so that we can reassing indiv. chars
     str_list = list(string)
-    # Initialize the starting and ending indicies in the list
+    # Calculate the ending index in the list
     end_x_range = (len(string) - 1) / 2
-    # end_x_range = (len(str_list) - 1) / 2
+    current_last_index = len(string) - 1
     # Loop through the list, replacing each evaluated char with the char
     # at the last evaluated index. Then increment evaluated char's index,
     # decrement evaluated last index
     for indx in xrange(end_x_range):
-        current_last_indx = end_x_range - indx
-        str_list[indx], str_list[current_last_indx] = str_list[current_last_indx], str_list[indx]
+        str_list[indx], str_list[current_last_index] = str_list[current_last_index], str_list[indx]
+        current_last_index -= 1
     return "".join(str_list)
     # print reversed_string
 
@@ -53,8 +53,9 @@ def test_reverse():
     # Define a test string for our tests
     long_txt_file = open("big.txt")
     test_string = long_txt_file.read()
+    # test_string = "The quick brown fox jumps over the lazy dog"
     # Test string character reversal
-    average_runtime(20, test_string)
+    average_runtime(100, test_string)
     # new_string = reverse_characters(test_string)
     # reverse_words(test_string)
 
