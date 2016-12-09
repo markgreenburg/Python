@@ -3,6 +3,7 @@ Example of selection sort on a (pseudo-)randomly-shuffled list
 '''
 
 import random
+import time
 
 def find_min_index(random_list, starting_index):
     '''
@@ -40,7 +41,12 @@ def test():
     '''
     Test the selection sort code with random input
     '''
-    user_list = range(100)
+    start_time = time.time()
+    user_list = range(10000)
     random.shuffle(user_list)
     print user_list
     selection_sort(user_list)
+    print "--- %s seconds ---" % (time.time() - start_time)
+
+if __name__ == "__main__":
+    test()
