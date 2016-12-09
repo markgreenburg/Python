@@ -19,6 +19,10 @@ class Person(object):
         self.unique_people_greeted = []
 
     def __repr__(self):
+        '''
+        We're returning object's string representation with some basic info
+        about the Person.
+        '''
         return '%s; %s; %s; %s; %s' % (self.name, self.email, self.phone,
                                        self.friends, self.greeting_count)
 
@@ -148,7 +152,8 @@ class Vehicle(object):
 # Testing some of the code...
 def test_objects():
     '''
-    Test each of the methods defined to ensure we get back expected output
+    Test each of the methods defined to ensure we get back expected output.
+    Print helpers to console to easily parse what's going on at each step.
     '''
     print "Instantiating sonny instance of Person class..."
     sonny = Person("Sonny", "sonny@hotmail.com", "483-485-4948")
