@@ -120,11 +120,49 @@ def str_to_int(string):
     empty strings, white space, +/- signs, calculating real values, and
     handling min / max
     '''
-    
+    # Initialize valid characters
+    acceptable_chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.']
+    special_chars = ['+', '-']
+    error_chars = ""
+    for char in string:
+        if char not in acceptable_chars and char not in special_chars:
+            error_chars += char + " "
+    if len(error_chars) != 0:
+        print "String has invalid characters: %s" % error_chars
+        return 0
+    # Convert string to list for processing with pop()
+    l_of_str = list(string)
+    # Initialize an empty list to hold chunked results
+    list_of_chars = []
+    range_max = len(string)
+    # Iterate through string and add each chunk to list
+    # Should probably be refactored to separate function and called
+    # recursively
+    for i in xrange(range_max):
+        # Pop out of string and always eval string[0]?? Loop through len(str)
+        # times.
+        if l_of_str[0] in acceptable_chars:
+            substring = ""
+            for i in range(range_max):
+                if l_of_str[0] in acceptable_chars:
+                    substring += l_of_str.pop(0)
+                else:
+                    break
+            list_of_chars.append("".join(substring))
+        else:
+            list_of_chars.append(l_of_str.pop(0))
+        if i == range_max - 1:
+            print list_of_chars
+            return list_of_chars
+    print list_of_chars
+    return list_of_chars
+            # Create an empty string for each sequence of numbers
 
-def test_algos():
+    # Convert the string into a list of chars, removing whitespace
+
+def test_functions():
     '''
-    Test our algos
+    Test our functions
     '''
     # # Define a test string for our tests
     # long_txt_file = open("big.txt")
@@ -140,9 +178,10 @@ def test_algos():
     # user_list = range(10000)
     # random.shuffle(user_list)
     # xth_selection_sort(user_list, 10)
-    special_string = "(((({)})))"
-    validate_string(special_string)
+    special_string = "12348+7395-09"
+    # validate_string(special_string)
+    str_to_int(special_string)
 
 
 if __name__ == "__main__":
-    test_algos()
+    test_functions()
