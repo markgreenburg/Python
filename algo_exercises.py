@@ -2,7 +2,7 @@
 A few basic algorithm exercises
 '''
 import time
-import random
+# import random
 
 # 1) Write an algorithm that takes in a string and reverses all the characters
 #    in that string
@@ -123,35 +123,31 @@ def str_to_int(string):
     # Initialize valid characters
     acceptable_chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.']
     special_chars = ['+', '-']
-    error_chars = ""
-    for char in string:
-        if char not in acceptable_chars and char not in special_chars:
-            error_chars += char + " "
-    if len(error_chars) != 0:
-        print "String has invalid characters: %s" % error_chars
-        return 0
     # Convert string to list for processing with pop()
     l_of_str = list(string)
     # Initialize an empty list to hold chunked results
     list_of_chars = []
-    range_max = len(string)
     # Iterate through string and add each chunk to list
-    # Should probably be refactored to separate function and called
-    # recursively
-    for i in xrange(range_max):
-        # Pop out of string and always eval string[0]?? Loop through len(str)
-        # times.
+    for _ in xrange(len(string)):
+        # Pop out of string and always eval string[0]. Loop through until
+        # there's nothing left in the input string
         if l_of_str[0] in acceptable_chars:
             substring = ""
-            for i in range(range_max):
-                if l_of_str[0] in acceptable_chars:
+            for _ in range(len(string)):
+                if len(l_of_str) == 0:
+                    list_of_chars.append(substring)
+                    return list_of_chars
+                elif l_of_str[0] in acceptable_chars:
                     substring += l_of_str.pop(0)
                 else:
                     break
-            list_of_chars.append("".join(substring))
-        else:
+            list_of_chars.append(substring)
+        elif l_of_str[0] in special_chars:
             list_of_chars.append(l_of_str.pop(0))
-        if i == range_max - 1:
+        else:
+            print "Encountered invalid character: %s" % l_of_str[0]
+            return 0
+        if len(l_of_str) == 0:
             print list_of_chars
             return list_of_chars
     print list_of_chars
@@ -178,7 +174,7 @@ def test_functions():
     # user_list = range(10000)
     # random.shuffle(user_list)
     # xth_selection_sort(user_list, 10)
-    special_string = "12348+7395-09"
+    special_string = "-12348+7395-09;"
     # validate_string(special_string)
     str_to_int(special_string)
 
