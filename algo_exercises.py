@@ -114,47 +114,61 @@ def validate_string(string):
     return check_pairs(string, "()") and check_pairs(string, "[]") and check_pairs(string, "{}")
 
 # 5) Convert string to integer
-def str_to_int(string):
+def chunk_string(string):
     '''
     Intelligently converts string to int, being sure to account for null /
     empty strings, white space, +/- signs, calculating real values, and
     handling min / max
     '''
     # Initialize valid characters
-    acceptable_chars = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.']
+    nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.']
     special_chars = ['+', '-']
     # Convert string to list for processing with pop()
     l_of_str = list(string)
     # Initialize an empty list to hold chunked results
     list_of_chars = []
-    # Iterate through string and add each chunk to list
+    # Iterate through string and add each chunk as item to list
     for _ in xrange(len(string)):
-        # Pop out of string and always eval string[0]. Loop through until
-        # there's nothing left in the input string
-        if l_of_str[0] in acceptable_chars:
+        if l_of_str[0] in nums:
+            # If the current item is a number, check if another number comes
+            # directly after it.
             substring = ""
-            for _ in range(len(string)):
+            for _ in xrange(len(string)):
                 if len(l_of_str) == 0:
+                    # If no chars left in string to check, return chunked list
                     list_of_chars.append(substring)
                     return list_of_chars
-                elif l_of_str[0] in acceptable_chars:
+                elif l_of_str[0] in nums:
+                    # Append the current number chunk to the list
                     substring += l_of_str.pop(0)
                 else:
+                    # Break out as soon as the first non-number is encountered
                     break
+            # Append the current number sequence string to the chunked list
             list_of_chars.append(substring)
         elif l_of_str[0] in special_chars:
+            # If the current char is a + or -, append it as its own list item
             list_of_chars.append(l_of_str.pop(0))
         else:
-            print "Encountered invalid character: %s" % l_of_str[0]
-            return 0
+            # If invalid char is encountered, pop it out and ignore
+            l_of_str.pop(0)
         if len(l_of_str) == 0:
-            print list_of_chars
+            # Once nothing is left to process in the string, return the new
+            # list
             return list_of_chars
-    print list_of_chars
     return list_of_chars
-            # Create an empty string for each sequence of numbers
 
-    # Convert the string into a list of chars, removing whitespace
+def parse_strings(num_list):
+    '''
+    Takes a list of chunked strings and converts them to int, performs basic
+    math on them if + or - operator encountered.
+    '''
+    # Combine strings with operators where possible
+    for item in xrange(1, len(num_list) - 1):
+        if num_list[item - 1] in ['-', '+']:
+            num_list[item] += num_list.pop(item - 1)
+    print num_list
+
 
 def test_functions():
     '''
@@ -174,10 +188,11 @@ def test_functions():
     # user_list = range(10000)
     # random.shuffle(user_list)
     # xth_selection_sort(user_list, 10)
-    special_string = "-12348+7395-09;"
+    special_string = "j-123 48+7395-09;"
     # validate_string(special_string)
-    str_to_int(special_string)
-
+    chunked_string = chunk_string(special_string)
+    print chunked_string
+    parse_strings(chunked_string)
 
 if __name__ == "__main__":
     test_functions()
