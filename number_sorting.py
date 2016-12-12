@@ -37,8 +37,26 @@ def selection_sort(random_list):
         swap_values(random_list, index_value, new_min)
     return random_list
 
+# Bubble sort not optimized
+def bubble_sort_slow(random_list):
+    '''
+    Uses bubble sort algorithm to sort a randomized list taken in as an arg.
+    Returns sorted list.
+    '''
+    swap = True
+    while swap:
+        swap = False
+        for i in range(1, len(random_list) - 1):
+            if random_list[i - 1] > random_list[i]:
+                random_list[i - 1], random_list[i] = random_list[i],\
+                random_list[i - 1]
+                swap = True
+        # We know that each pass sorts at least the last item in the list into
+        # correct position
+    return random_list
+
 # Bubble sort
-def bubble_sort(random_list):
+def bubble_sort_faster(random_list):
     '''
     Uses bubble sort algorithm to sort a randomized list taken in as an arg.
     Returns sorted list.
@@ -68,10 +86,10 @@ def test():
     copy_2 = user_list
     copy_3 = user_list
     start_time = time.time()
-    bubble_sort(copy_1)
+    bubble_sort_slow(copy_1)
     print "Normal bsort took %s seconds" % (time.time() - start_time)
     start_time = time.time()
-    bubble_sort(copy_2)
+    bubble_sort_faster(copy_2)
     print "Optimized bsort took %s seconds" % (time.time() - start_time)
     start_time = time.time()
     selection_sort(copy_3)
