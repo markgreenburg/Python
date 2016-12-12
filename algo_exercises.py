@@ -75,7 +75,8 @@ def swap_values(random_list, current_index, min_index):
         random_list[min_index] = temp_value_hold
     return random_list
 
-#   Then, modify Selection Sort to only sort as many items as needed.
+#   Then, modify Selection Sort to only sort as many items as needed. Heapsort
+#   would be faster here, but we've already got Selection sort implemented so...
 def xth_selection_sort(random_list, xth_largest):
     '''
     Find the xth largest value for a given list. Prints value.
@@ -116,29 +117,29 @@ def validate_string(string):
 # 5) Convert string to integer
 def chunk_string(string):
     '''
-    Intelligently converts string to int, being sure to account for null /
-    empty strings, white space, +/- signs, calculating real values, and
-    handling min / max
+    Intelligently chunks strings into number sequences and math operators.
+    Returns results as list. For input '123-456+789', return would be list
+    ['123', '-','456','789']
     '''
     # Initialize valid characters
-    nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.']
     special_chars = ['+', '-']
     # Convert string to list for processing with pop()
     l_of_str = list(string)
     # Initialize an empty list to hold chunked results
     list_of_chars = []
+    len_of_string = len(string)
     # Iterate through string and add each chunk as item to list
-    for _ in xrange(len(string)):
-        if l_of_str[0] in nums:
+    for _ in xrange(len_of_string):
+        if l_of_str[0].isdigit():
             # If the current item is a number, check if another number comes
             # directly after it.
             substring = ""
-            for _ in xrange(len(string)):
+            for _ in xrange(len_of_string):
                 if len(l_of_str) == 0:
                     # If no chars left in string to check, return chunked list
                     list_of_chars.append(substring)
                     return list_of_chars
-                elif l_of_str[0] in nums:
+                elif l_of_str[0].isdigit():
                     # Append the current number chunk to the list
                     substring += l_of_str.pop(0)
                 else:
@@ -158,17 +159,33 @@ def chunk_string(string):
             return list_of_chars
     return list_of_chars
 
-def parse_strings(num_list):
+def parse_strings(string):
     '''
-    Takes a list of chunked strings and converts them to int, performs basic
-    math on them if + or - operator encountered.
+    Takes a string, cleans up input, and converts it to int, performs basic
+    math if operator encountered.
     '''
-    # Combine strings with operators where possible
-    for item in xrange(1, len(num_list) - 1):
-        if num_list[item - 1] in ['-', '+']:
-            num_list[item] += num_list.pop(item - 1)
-    print num_list
-
+    # Initialize valid special characters
+    special_chars = ['+', '-', '*', '/']
+    # Convert string to list for processing with pop()
+    list_of_str = list(string)
+    # Initialize an empty list to hold chunked results
+    list_of_chars = []
+    # Iterate through string and add each chunk as item to list
+    while len(list_of_str) > 0:
+        if list_of_str[0].isdigit() or list_of_str[0] in special_chars:
+            list_of_chars.append(list_of_str.pop(0))
+        else:
+            list_of_str.pop(0)
+    try:
+        joined_list = ''.join(list_of_chars)
+        # Using eval() only because we control the input 100%. Obviously
+        # this is dangerous, but ast.literal_eval doesn't do what we need
+        converted_string = eval(joined_list) #pylint: disable=W0123
+        return converted_string
+    except SyntaxError:
+        print '''Sorry, that's not valid. You either have too many
+        math operators or one of your numbers contains a leading '0'.
+        Please change your input and try again.'''
 
 def test_functions():
     '''
@@ -188,11 +205,10 @@ def test_functions():
     # user_list = range(10000)
     # random.shuffle(user_list)
     # xth_selection_sort(user_list, 10)
-    special_string = "j-123 48+7395-09;"
+    special_string = "j-123 48+7395-9;"
     # validate_string(special_string)
-    chunked_string = chunk_string(special_string)
-    print chunked_string
-    parse_strings(chunked_string)
+    print chunk_string(special_string)
+    print parse_strings(special_string)
 
 if __name__ == "__main__":
     test_functions()

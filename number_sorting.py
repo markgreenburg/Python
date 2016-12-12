@@ -1,10 +1,10 @@
 '''
-Example of selection sort on a (pseudo-)randomly-shuffled list
+Example of sorting algorithms on (pseudo-)randomly-shuffled lists
 '''
-
 import random
 import time
 
+# Selection Sort
 def find_min_index(random_list, starting_index):
     '''
     For a given sublist starting at the starting_index and ending at the
@@ -37,23 +37,41 @@ def selection_sort(random_list):
         swap_values(random_list, index_value, new_min)
     print random_list
 
+# Bubble sort
+def bubble_sort(random_list):
+    '''
+    Uses bubble sort algorithm to sort a randomized list taken in as an arg.
+    Returns sorted list.
+    '''
+    swap = True
+    while swap:
+        swap = False
+        for i in range(1, len(random_list) - 1):
+            if random_list[i - 1] > random_list[i]:
+                random_list[i - 1], random_list[i] = random_list[i],\
+                random_list[i - 1]
+                swap = True
+    return random_list
+
 def test():
     '''
     Test the selection sort code with random input
     '''
-    user_list = range(10000)
-    random.shuffle(user_list)
-    # Copy same shuffled list for other sort comparisons
-    ul2 = user_list
-    # Timed execution of our selection sort
-    start_time = time.time()
-    selection_sort(user_list)
-    print "Selection sort took %s seconds" % (time.time() - start_time)
-    # Compare our results to the internal sort function
-    start_time = time.time()
-    ul2.sort()
-    print "Python's sort function took %s seconds" % (time.time() - start_time)
-    # No surprise...Python's
+    user_list = [4, 3, 1, 8, 3, 1, 2, 9]
+    print bubble_sort(user_list)
+    # user_list = range(10000)
+    # random.shuffle(user_list)
+    # # Copy same shuffled list for other sort comparisons
+    # ul2 = user_list
+    # # Timed execution of our selection sort
+    # start_time = time.time()
+    # selection_sort(user_list)
+    # print "Selection sort took %s seconds" % (time.time() - start_time)
+    # # Compare our results to the internal sort function
+    # start_time = time.time()
+    # ul2.sort()
+    # print "Python's sort function took %s seconds" % (time.time() - start_time)
+    # # No surprise...Python's
 
 #
 if __name__ == "__main__":
