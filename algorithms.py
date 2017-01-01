@@ -39,8 +39,38 @@ def concat_list(int_list):
         num_string += str(num)
     return num_string
 
+"""
+Given an array of n positive integers and a positive integer s, find the minimal length of a subarray of which the sum ≥ s. If there isn't one, return 0 instead.
+"""
+
+def main(user_list, comparator):
+    """
+    Main function - pseudocode
+    """
+    subarray_sum = 0
+    subarray_len = 1
+    range_end = len(user_list)
+    subrange = range_end
+    iterate = True
+    while iterate:
+        for position in range(subrange):
+            subarray_sum = sum(user_list[position:(position + subarray_len)])
+            if subarray_sum >= comparator:
+                return subarray_len
+        subrange -= 1        
+        subarray_len += 1
+        if subarray_len > range_end:
+            return 0
+    # take a slice of the list
+    # total = largest sum of the slice
+    # add the slice together
+    # if greater than passed in num, return len
+    # else, keep iterating with longer subarrays
+
+
 
 if __name__ == "__main__":
-    list_to_compare = [0, 4, 45, 7, 767, 7, 787]
-    sort(list_to_compare)
-    print concat_list(list_to_compare)
+    list_to_compare = [5, 4, 45, 7, 76, 7, 27]
+    # sort(list_to_compare)
+    # print concat_list(list_to_compare)
+    main(list_to_compare, 800)
