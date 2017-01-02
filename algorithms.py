@@ -1,6 +1,8 @@
 """
 Given a list of non negative integers, arrange them such that they form the largest number.
-For example, given [3, 20, 34, 5, 9], the largest formed number is 9534320. (Note: The result may be very large, so you need to return a string instead of an integer.)
+For example, given [3, 20, 34, 5, 9], the largest formed number is 9534320.
+(Note: The result may be very large, so you need to return a string instead of
+an integer.)
 """
 
 def compare(cur_num, prev_num):
@@ -40,12 +42,15 @@ def concat_list(int_list):
     return num_string
 
 """
-Given an array of n positive integers and a positive integer s, find the minimal length of a subarray of which the sum ≥ s. If there isn't one, return 0 instead.
+Given an array of n positive integers and a positive integer s, find the 
+minimal length of a subarray of which the sum >= s. If there is not one return 
+0 instead.
 """
 
-def main(user_list, comparator):
+def find_len(user_list, comparator):
     """
-    Main function - pseudocode
+    takes a given positive int list and value to compare against. Returns len
+    of the shortest sublist that is >= the comparator value.
     """
     subarray_sum = 0
     subarray_len = 1
@@ -57,20 +62,58 @@ def main(user_list, comparator):
             subarray_sum = sum(user_list[position:(position + subarray_len)])
             if subarray_sum >= comparator:
                 return subarray_len
-        subrange -= 1        
+        subrange -= 1
         subarray_len += 1
         if subarray_len > range_end:
             return 0
-    # take a slice of the list
-    # total = largest sum of the slice
-    # add the slice together
-    # if greater than passed in num, return len
-    # else, keep iterating with longer subarrays
 
+"""
+Given an array of strings, return all groups of strings that are anagrams. 
+Example: ['dome','node', 'done','mode','help','demo'] Should return:[['node',
+'done'],['mode','dome','demo']] because node and done both have 'D-E-N-O' demo, 
+mode and dome have 'D-E-M-O'
+"""
 
+def compare_words(word_1, word_2):
+    """
+    Takes two strings as arguments. Returns True if strings are anagrams of each other.
+    """
+    return sorted(list(word_1)) == sorted(list(word_2))
+
+def find_anagrams(strings_list):
+    """
+    Takes a list of strings as arg. Returns list of sublists of all anagrams
+    within the original list.
+    """
+    anagrams = []
+    subrange_start = 1
+    for word in strings_list[:len(strings_list) -1]:
+        sublist = []
+        for subword in strings_list[subrange_start:]:
+            if compare_words(word, subword):
+                if word not in sublist and word not in anagrams:
+                    sublist.append(word)
+                sublist.append(subword)
+                del strings_list[strings_list.index(subword)]
+        if len(sublist) > 0:
+            anagrams.append(sublist)
+        subrange_start += 1
+    return anagrams
+
+    # empty_list = []
+    # for string in strings_list:
+    #     empty_list.append(list(string))
+    # unique_combos = []
+    # for str_indx in range(len(strings_list)):
+    #     sublist = []
+    #     for char_indx in range(len(strings_list[str_indx])):
+    #         sublist.append(strings_list[str_indx][char_indx])
+    #     unique_combos.append(sublist)
 
 if __name__ == "__main__":
-    list_to_compare = [5, 4, 45, 7, 76, 7, 27]
+    # list_to_compare = [5, 4, 45, 7, 76, 7, 27]
     # sort(list_to_compare)
     # print concat_list(list_to_compare)
-    main(list_to_compare, 800)
+    # find_len(list_to_compare, 800)
+    list_of_strings = ['dome', 'node', 'done', 'mode', 'help', 'demo']
+    find_anagrams(list_of_strings)
