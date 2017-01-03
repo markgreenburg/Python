@@ -1,8 +1,8 @@
 """
-Given a list of non negative integers, arrange them such that they form the largest number.
-For example, given [3, 20, 34, 5, 9], the largest formed number is 9534320.
-(Note: The result may be very large, so you need to return a string instead of
-an integer.)
+Given a list of non negative integers, arrange them such that they form the
+largest number. For example, given [3, 20, 34, 5, 9], the largest formed number
+is 9534320. (Note: The result may be very large, so you need to return a string
+instead of an integer.)
 """
 
 def compare(cur_num, prev_num):
@@ -91,29 +91,26 @@ def find_anagrams(strings_list):
         sublist = []
         for subword in strings_list[subrange_start:]:
             if compare_words(word, subword):
-                if word not in sublist and word not in anagrams:
+                if word not in sublist and not any(word in anagram for anagram \
+                in anagrams):
                     sublist.append(word)
-                sublist.append(subword)
-                del strings_list[strings_list.index(subword)]
+                if not any(subword in anagram for anagram in anagrams):
+                    sublist.append(subword)
         if len(sublist) > 0:
             anagrams.append(sublist)
         subrange_start += 1
     return anagrams
-
-    # empty_list = []
-    # for string in strings_list:
-    #     empty_list.append(list(string))
-    # unique_combos = []
-    # for str_indx in range(len(strings_list)):
-    #     sublist = []
-    #     for char_indx in range(len(strings_list[str_indx])):
-    #         sublist.append(strings_list[str_indx][char_indx])
-    #     unique_combos.append(sublist)
-
-if __name__ == "__main__":
+# any(2 in i for i in a)
+def test():
+    """
+    Calls functions above to test with sample inputs
+    """
     # list_to_compare = [5, 4, 45, 7, 76, 7, 27]
     # sort(list_to_compare)
     # print concat_list(list_to_compare)
     # find_len(list_to_compare, 800)
     list_of_strings = ['dome', 'node', 'done', 'mode', 'help', 'demo']
-    find_anagrams(list_of_strings)
+    print find_anagrams(list_of_strings)
+
+if __name__ == "__main__":
+    test()
