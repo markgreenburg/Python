@@ -100,7 +100,7 @@ def find_anagrams(strings_list):
             anagrams.append(sublist)
         subrange_start += 1
     return anagrams
-# any(2 in i for i in a)
+
 def test():
     """
     Calls functions above to test with sample inputs
